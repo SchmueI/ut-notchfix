@@ -1,0 +1,15 @@
+{
+    "name": "notchfix.schmuel",
+    "description": "A simple App to align the User Interface to Hardware Notches",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Notchfix",
+    "hooks": {
+        "notchfix": {
+            "apparmor": "notchfix.apparmor",
+            "desktop":  "notchfix.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "Schmuel Odradek <git@schmuel.net>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}
