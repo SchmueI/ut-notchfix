@@ -30,26 +30,47 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    Page {
-        anchors.fill: parent
+    PageStack{
+        Page {
+            id: page0
+            anchors.fill: parent
 
-        header: PageHeader {
-            id: header
-            title: i18n.tr('Notchfix')
-        }
-
-        Label {
-            anchors {
-                top: header.bottom
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
+            header: PageHeader {
+                id: header
+                title: i18n.tr('Notchfix')
             }
-            text: i18n.tr('Check the logs!')
 
-            verticalAlignment: Label.AlignVCenter
-            horizontalAlignment: Label.AlignHCenter
+            Column{
+                width: parent.width
+                height: parent.height - header.height - units.gu(2)
+                y: header.height + units.gu(2)
+
+
+                Text{
+                    text: i18n.tr("This Tool will allign the User Interface properly according to the notches of your hardware device.")
+                    width: parent.width - units.gu(2)
+                    x: units.gu(2)
+                    wrapMode: "WordWrap"
+                }
+
+            }
+
+            Button {
+                width:page0.width * 0.38
+                x:page0.width*0.1
+                y:page0.height*0.9
+                text: i18n.tr("Apply")
+                onClicked: print ("Apply")
+            }
+            Button {
+                width:page0.width * 0.38
+                y:page0.height*0.9
+                x:page0.width-width-page0.width*0.1
+                text: i18n.tr("Reset")
+                onClicked: print ("Reset")
+            }
         }
+
     }
 
     Python {
@@ -58,12 +79,20 @@ MainView {
         Component.onCompleted: {
             addImportPath(Qt.resolvedUrl('../src/'));
 
-            importModule('example', function() {
-                console.log('module imported');
-                python.call('example.speak', ['Hello World!'], function(returnValue) {
-                    console.log('example.speak returned ' + returnValue);
-                })
-            });
+            //importModule('example', function() {
+            //    console.log('module imported');
+            //    python.call('example.speak', ['Hello World!'], function(returnValue) {
+            //        console.log('example.speak returned ' + returnValue);
+            //    })
+            //});
+
+            importModule("apply", function(){
+                console.log("Apply Imported")
+            })
+
+            importModule("reset", function(){
+                console.log("Apply Imported")
+            })
         }
 
         onError: {
