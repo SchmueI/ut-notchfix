@@ -30,25 +30,189 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    Page {
-        anchors.fill: parent
+    PageStack {
+        id: pageStack
+        Component.onCompleted: push (page0)
 
-        header: PageHeader {
-            id: header
-            title: i18n.tr('Notchfix')
+
+        Page {
+            id: page0
+            anchors.fill: parent
+            visible: false
+
+            header: PageHeader {
+                id: header
+                title: i18n.tr("Notchfix")
+            }
+
+            Column{
+                y: header.height+units.gu(2)
+                height: parent.height-header.height-units.gu(2)
+                width: parent.width
+                spacing: units.gu(1)
+
+                Label{
+                    x: parent.x + units.gu(2)
+                    text: i18n.tr("left margin")
+                }
+                TextField{
+                    id: leftmargin
+                    x: parent.x + units.gu(2)
+                    validator: IntValidator {bottom: 0; top: 31.0;}
+                }
+
+                Item{
+                    width: 1
+                    height: units.gu(1)
+                }
+
+                Label{
+                    anchors.top: leftmargin.bottom + units.gu(2)
+                    x: parent.x + units.gu(2)
+                    text: i18n.tr("right margin")
+                }
+                TextField{
+                    id: rightmargin
+                    x: parent.x + units.gu(2)
+                    validator: IntValidator {bottom: 0; top: 31.0;}
+                }
+
+                Item{
+                    width: 1
+                    height: units.gu(1)
+                }
+
+                Label{
+                    anchors.top: leftmargin.bottom + units.gu(2)
+                    x: parent.x + units.gu(2)
+                    text: i18n.tr("minimized panel height")
+                }
+                TextField{
+                    id: minpanheight
+                    x: parent.x + units.gu(2)
+                    validator: IntValidator {bottom: 0; top: 31.0;}
+                }
+
+                Item{
+                    width: 1
+                    height: units.gu(1)
+                }
+
+                Label{
+                    anchors.top: leftmargin.bottom + units.gu(2)
+                    x: parent.x + units.gu(2)
+                    text: i18n.tr("expanded panel height")
+                }
+                TextField{
+                    id: exppanheight
+                    x: parent.x + units.gu(2)
+                    validator: IntValidator {bottom: 0; top: 31.0;}
+                }
+            }
+
+            Button {
+                width:page0.width * 0.3
+                x:page0.width*0.1
+                y:page0.height*0.9
+                text: i18n.tr("Select presets")
+                onClicked: pageStack.push(presets)
+            }
+            Button {
+                width:page0.width * 0.3
+                y:page0.height*0.9
+                x:page0.width-width-page0.width*0.1
+                text: i18n.tr("Apply")
+                onClicked: print ("Apply")
+            }
         }
 
-        Label {
-            anchors {
-                top: header.bottom
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-            text: i18n.tr('Check the logs!')
+        Page {
+            id: presets
+            anchors.fill: parent
+            visible: false
 
-            verticalAlignment: Label.AlignVCenter
-            horizontalAlignment: Label.AlignHCenter
+            header: PageHeader{
+                id: headerpres
+                title: i18n.tr("Notchfix > Presets")
+            }
+
+            ScrollView{
+                id: scrollView
+
+                y: headerpres.height + units.gu(2)
+                width: parent.width
+                height: presets.height-headerpres.height
+
+                clip: true
+
+                Column {
+                    id: presetColumn
+                    spacing: units.gu(2)
+                    width: scrollView.width
+                
+
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Volla Phone")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Volla Phone X")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Volla Phone 22")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Volla Phone X23")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Fairphone 4")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("OnePlus 6/6T")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Xiaomi Mi Mix 3")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Xiaomi Poco F1")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Xiaomi Redmi Note 7")
+                        onClicked: print ("Apply")
+                    }
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Xiaomi Redmi Note 9S")
+                        onClicked: print ("Apply")
+                    }
+                }
+            }
         }
     }
 
