@@ -211,6 +211,13 @@ MainView {
                         text: i18n.tr("Xiaomi Redmi Note 9S")
                         onClicked: print ("Apply")
                     }
+
+                    Button {
+                        width: presets.width * 0.6
+                        x: parent.width/2-width/2
+                        text: i18n.tr("Reset")
+                        onClicked: print ("Apply")
+                    }
                 }
             }
         }
