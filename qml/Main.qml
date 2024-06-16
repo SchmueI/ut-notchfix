@@ -58,7 +58,7 @@ MainView {
                 TextField{
                     id: leftmargin
                     x: parent.x + units.gu(2)
-                    validator: IntValidator {bottom: 0; top: 31.0;}
+                    validator: RegExpValidator {regExp: /[+-]?([0-9]*[.])?[0-9]+/}
                 }
 
                 Item{
@@ -74,7 +74,7 @@ MainView {
                 TextField{
                     id: rightmargin
                     x: parent.x + units.gu(2)
-                    validator: IntValidator {bottom: 0; top: 31.0;}
+                    validator: RegExpValidator {regExp: /[+-]?([0-9]*[.])?[0-9]+/}
                 }
 
                 Item{
@@ -90,7 +90,7 @@ MainView {
                 TextField{
                     id: minpanheight
                     x: parent.x + units.gu(2)
-                    validator: IntValidator {bottom: 0; top: 31.0;}
+                    validator: RegExpValidator {regExp: /[+-]?([0-9]*[.])?[0-9]+/}
                 }
 
                 Item{
@@ -106,19 +106,19 @@ MainView {
                 TextField{
                     id: exppanheight
                     x: parent.x + units.gu(2)
-                    validator: IntValidator {bottom: 0; top: 31.0;}
+                    validator: RegExpValidator {regExp: /[+-]?([0-9]*[.])?[0-9]+/}
                 }
             }
 
             Button {
-                width:page0.width * 0.3
+                width:page0.width * 0.38
                 x:page0.width*0.1
                 y:page0.height*0.9
                 text: i18n.tr("Select presets")
                 onClicked: pageStack.push(presets)
             }
             Button {
-                width:page0.width * 0.3
+                width:page0.width * 0.38
                 y:page0.height*0.9
                 x:page0.width-width-page0.width*0.1
                 text: i18n.tr("Apply")
@@ -231,9 +231,9 @@ MainView {
 
             importModule('example', function() {
                 console.log('module imported');
-                python.call('example.speak', ['Hello World!'], function(returnValue) {
-                    console.log('example.speak returned ' + returnValue);
-                })
+                //python.call('example.speak', ['Hello World!'], function(returnValue) {
+                //    console.log('example.speak returned ' + returnValue);
+                //})
             });
         }
 
