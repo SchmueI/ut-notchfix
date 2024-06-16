@@ -20,6 +20,7 @@ import Lomiri.Components 1.3
 import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
 import io.thp.pyotherside 1.4
+import Ubuntu.Components.Popups 1.3
 
 MainView {
     id: root
@@ -60,17 +61,74 @@ MainView {
                 x:page0.width*0.1
                 y:page0.height*0.9
                 text: i18n.tr("Apply")
-                onClicked: print ("Apply")
+                onClicked: PopupUtils.open(applyPrompt)
             }
             Button {
                 width:page0.width * 0.38
                 y:page0.height*0.9
                 x:page0.width-width-page0.width*0.1
                 text: i18n.tr("Reset")
-                onClicked: print ("Reset")
+                onClicked: PopupUtils.open(resetPrompt)
             }
         }
 
+    }
+
+
+    Component {
+        id: applyPrompt
+        Dialog {
+            id: passPrompt
+            title: "Password"
+            Label {
+                text: i18n.tr("Enter your password:")
+                wrapMode: Text.Wrap
+            }
+            TextField {
+                id: password
+                placeholderText: "password"
+                echoMode: TextInput.Password
+            }
+            
+            Button {
+                text: i18n.tr("Ok")
+                color: "green"
+                onClicked: {
+                    PopupUtils.close(passPrompt)
+                    python.call('apply.run', [password.text], function(returnValue) {
+                        console.log('Applying');
+                    })
+                }
+            }
+        }
+    }
+
+    Component {
+        id: resetPrompt
+        Dialog {
+            id: passPrompt
+            title: "Password"
+            Label {
+                text: i18n.tr("Enter your password:")
+                wrapMode: Text.Wrap
+            }
+            TextField {
+                id: password
+                placeholderText: "password"
+                echoMode: TextInput.Password
+            }
+
+            Button {
+                text: i18n.tr("Ok")
+                color: "green"
+                onClicked: {
+                    PopupUtils.close(passPrompt)
+                    python.call('reset.run', [password.text], function(returnValue) {
+                        console.log('Resetting');
+                    })
+                }
+            }
+        }
     }
 
     Python {
