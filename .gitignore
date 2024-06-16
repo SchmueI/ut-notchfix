@@ -1,2 +1,10 @@
 /build/
 /.clickable/
+
+po/
+
+src/__pycache__/
+
+CMakeLists.txt.user
+
+CMakeLists.txt.user.shared
